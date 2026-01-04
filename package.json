@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Production-ready Microfrontend architecture using Vite, Module Federation, React 19, and PNPM workspaces",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.26.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/yourusername/vite-module-federation-monorepo.git"
@@ -37,6 +37,6 @@
   },
   "engines": {
     "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
+    "pnpm": ">=10.26.2"
   }
 }
