@@ -1,0 +1,42 @@
+{
+  "name": "vite-module-federation-monorepo",
+  "version": "1.0.0",
+  "description": "Production-ready Microfrontend architecture using Vite, Module Federation, React 19, and PNPM workspaces",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/vite-module-federation-monorepo.git"
+  },
+  "author": "Anurag Kumar",
+  "license": "MIT",
+  "keywords": [
+    "microfrontend",
+    "module-federation",
+    "vite",
+    "react",
+    "pnpm",
+    "monorepo",
+    "nginx",
+    "docker"
+  ],
+  "scripts": {
+    "dev:host": "pnpm --filter @mfe/host dev",
+    "dev:remote": "pnpm --filter @mfe/remote dev",
+    "build:shared": "pnpm --filter @mfe/shared build",
+    "build:remote": "pnpm --filter @mfe/remote build",
+    "build:host": "pnpm --filter @mfe/host build",
+    "build": "pnpm build:shared && pnpm build:remote && pnpm build:host",
+    "clean": "rm -rf apps/*/dist apps/*/node_modules node_modules",
+    "docker:build": "docker build -t vite-mfe-monorepo .",
+    "docker:run": "docker run -p 8080:80 vite-mfe-monorepo"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
