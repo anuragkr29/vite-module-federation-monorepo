@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import federation from "@originjs/vite-plugin-federation";
+import react from '@vitejs/plugin-react';
+import { federation } from '@module-federation/vite';
+
 
 export default defineConfig({
   plugins: [
@@ -8,7 +9,13 @@ export default defineConfig({
     federation({
       name: "host",
       remotes: {
-        remote: `${process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5173'}/mf/assets/remoteEntry.mjs`
+        remote: {
+          name: "remote",
+          type: "module",
+          entry: process.env.NODE_ENV === 'production'
+            ? '/mf/remoteEntry.js' // this is based of Dockerfile NGINX setup
+            : 'http://localhost:5000/remoteEntry.js'
+        }
       },
       shared: {
         react: { singleton: true, requiredVersion: "^19.0.0" },
@@ -22,6 +29,7 @@ export default defineConfig({
     minify: true
   },
   server: {
-    port: 3000
+    port: 3000,
+    strictPort: true
   }
 });
